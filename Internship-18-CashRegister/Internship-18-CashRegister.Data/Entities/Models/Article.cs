@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Internship_18_CashRegister.Data.Entities.Models
+{
+    public class Article
+    {
+        public int ArticleId { get; set; }
+        public string Name { get; set; }
+        public Guid Barcode { get; set; }
+        public int UnitsInStock { get; set; }
+        public int Price { get; set; }
+        public int TaxRate { get; set; }
+        public ICollection<ArticleReceipt> ArticleReceipts { get; set; }
+    }
+}
