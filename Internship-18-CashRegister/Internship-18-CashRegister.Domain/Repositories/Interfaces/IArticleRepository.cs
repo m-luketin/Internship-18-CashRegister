@@ -10,7 +10,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
         List<Article> GetAllArticles();
         bool AddArticle(Article articleToAdd);
         bool EditArticle(Article editedArticle);
-        bool DeleteArticle(int idOfArticleToDelete);
         Article GetArticleById(int id);
     }
 }

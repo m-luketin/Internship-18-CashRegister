@@ -9,8 +9,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
     {
         List<Receipt> GetAllReceipts();
         bool AddReceipt(Receipt receiptToAdd);
-        bool EditReceipt(Receipt editedReceipt);
-        bool DeleteReceipt(int idOfReceiptToDelete);
         Receipt GetReceiptById(int id);
     }
 }

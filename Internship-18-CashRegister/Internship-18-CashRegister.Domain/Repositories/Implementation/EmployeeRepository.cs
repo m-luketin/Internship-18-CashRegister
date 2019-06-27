@@ -1,36 +1,29 @@
-﻿using Internship_18_CashRegister.Data.Entities.Models;
+﻿using Internship_18_CashRegister.Data.Entities;
+using Internship_18_CashRegister.Data.Entities.Models;
 using Internship_18_CashRegister.Domain.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Internship_18_CashRegister.Domain.Repositories.Implementation
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        public bool AddEmployee(Employee employeeToAdd)
+        private readonly CashRegisterContext _context;
+        public EmployeeRepository(CashRegisterContext context)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteEmployee(int idOfEmployeeToDelete)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditEmployee(Employee editedEmployee)
-        {
-            throw new NotImplementedException();
+            _context = context;
         }
 
         public List<Employee> GetAllEmployees()
         {
-            throw new NotImplementedException();
+            return _context.Employees.ToList();
         }
 
         public Employee GetEmployeeById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Employees.Find(id);
         }
     }
 }

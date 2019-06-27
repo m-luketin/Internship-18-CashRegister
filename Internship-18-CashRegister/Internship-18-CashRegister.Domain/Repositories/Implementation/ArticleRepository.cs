@@ -11,6 +11,15 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
     public class ArticleRepository : IArticleRepository
     {
         private readonly CashRegisterContext _context;
+        public ArticleRepository(CashRegisterContext context)
+        {
+            _context = context;
+        }
+
+        public List<Article> GetAllArticles()
+        {
+            return _context.Articles.ToList();
+        }
 
         public bool AddArticle(Article articleToAdd)
         {
@@ -18,18 +27,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
                 return false;
 
             _context.Articles.Add(articleToAdd);
-            _context.SaveChanges();
-            return true;
-        }
-
-        public bool DeleteArticle(int idOfArticleToDelete)
-        {
-            var articleToDelete = _context.Articles.Find(idOfArticleToDelete);
-
-            if(articleToDelete == null)
-                return false;
-
-            _context.Remove(articleToDelete);
             _context.SaveChanges();
             return true;
         }
@@ -52,10 +49,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
             return true;
         }
 
-        public List<Article> GetAllArticles()
-        {
-            return _context.Articles.ToList();
-        }
 
         public Article GetArticleById(int id)
         {

@@ -8,9 +8,5 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
     public interface ICashRegisterRepository
     {
         List<CashRegister> GetAllCashRegisters();
-        bool AddCashRegister(CashRegister cashRegisterToAdd);
-        bool EditCashRegister(CashRegister editedCashRegister);
-        bool DeleteCashRegister(int idOfCashRegisterToDelete);
-        CashRegister GetCashRegisterById(int id);
     }
 }
