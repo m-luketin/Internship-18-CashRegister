@@ -43,12 +43,11 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
 
             articleToEdit.Price = editedArticle.Price;
             articleToEdit.Barcode = editedArticle.Barcode;
-            articleToEdit.TaxRate = editedArticle.TaxRate;
+            articleToEdit.IsTaxRateReduced = editedArticle.IsTaxRateReduced;
             _context.SaveChanges();
 
             return true;
         }
-
 
         public Article GetArticleById(int id)
         {

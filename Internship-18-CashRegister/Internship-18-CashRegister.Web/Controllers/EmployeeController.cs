@@ -18,7 +18,7 @@ namespace Internship_18_CashRegister.Web.Controllers
         }
         private readonly IEmployeeRepository _employeeRepository;
 
-        [HttpGet("All")]
+        [HttpGet("all")]
         public IActionResult GetAllEmployees()
         {
             return Ok(_employeeRepository);
