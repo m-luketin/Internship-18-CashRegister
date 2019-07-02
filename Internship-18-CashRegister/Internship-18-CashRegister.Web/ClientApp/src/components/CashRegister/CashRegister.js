@@ -6,6 +6,4 @@ const CashRegister = () => {
     );
 }
 
-
-
 export default CashRegister;
