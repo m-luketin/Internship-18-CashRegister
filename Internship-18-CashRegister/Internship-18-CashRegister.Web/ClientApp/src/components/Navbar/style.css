@@ -1,0 +1,28 @@
+.navbar {
+	width: 100%;
+	font-weight: 600;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-around;
+	text-decoration: none;
+	background-color: black;
+	padding: 0px;
+}
+
+.navbar-item {
+	width: 25%;
+	height: 100%;
+	color: white;
+	border: 1px solid white;
+	text-align: center;
+	padding: 5px 5px 25px 5px;
+}
+
+.navbar-item:hover, .navbar-item:focus {
+	font-size: 27px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    padding: 0px 0px 18px 0px;
+
+}

@@ -1,0 +1,40 @@
+.basket {
+    padding-top: 20px;
+    height: 90%;
+    width: 50%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+}
+
+.basket-title {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.basket-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.column-name {
+    width: 35%;
+    border: 0.1px solid black;
+    text-align: center;
+}
+
+.basket-item {
+    width: 60%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item-column {
+    text-align: center;
+    width: 35%;
+    border-bottom: 1px solid black;
+}

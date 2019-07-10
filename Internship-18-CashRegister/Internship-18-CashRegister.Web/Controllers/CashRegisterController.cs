@@ -6,6 +6,7 @@ using Internship_18_CashRegister.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace Internship_18_CashRegister.Web.Controllers
 {
@@ -19,11 +20,21 @@ namespace Internship_18_CashRegister.Web.Controllers
         }
         private readonly ICashRegisterRepository _cashRegisterRepository;
 
-        [Authorize(Roles="Employee")]
+        [Authorize(Roles = "Employee")]
         [HttpGet("all")]
         public IActionResult GetAllCashRegisters()
         {
             return Ok(_cashRegisterRepository);
+        }
+        [HttpPost("authenticate")]
+        public IActionResult ValidateCashRegister([FromBody]JObject data)
+        {
+            var id = int.Parse(data["id"].ToString());
+
+            if(_cashRegisterRepository.DoesExist(id))
+                return Ok();
+
+            return NotFound();
         }
     }
 }

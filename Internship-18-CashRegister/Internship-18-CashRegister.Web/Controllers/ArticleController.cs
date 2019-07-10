@@ -6,6 +6,8 @@ using Internship_18_CashRegister.Data.Entities.Models;
 using Internship_18_CashRegister.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Internship_18_CashRegister.Web.Controllers
 {
@@ -22,7 +24,7 @@ namespace Internship_18_CashRegister.Web.Controllers
         [HttpGet("all")]
         public IActionResult GetAllArticles()
         {
-            return Ok(_articleRepository);
+            return Ok(_articleRepository.GetAllArticles());
         }
 
         [HttpPost("add")]
@@ -56,6 +58,26 @@ namespace Internship_18_CashRegister.Web.Controllers
                 return Ok(gottenArticle);
 
             return NotFound();
+        }
+        [HttpPost("get-by-name")]
+        public IActionResult GetArticle([FromBody]JObject data)
+        {
+            var name = data["name"].ToString();
+            var gottenArticle = _articleRepository.GetArticleByName(name);
+
+            if(gottenArticle != null)
+                return Ok(gottenArticle);
+
+            return NotFound();
+        }
+        [HttpPost("search")]
+        public IActionResult SearchArticles([FromBody]JObject data)
+        {
+            var toSearch = data["search"].ToString();
+
+            var gottenArticles = _articleRepository.SearchArticles(toSearch);
+
+            return Ok(JsonConvert.SerializeObject(gottenArticles));
         }
     }
 }
