@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import BasketItems from '../CashRegister/BasketItems/BasketItems';
 import './style.css';
 import Axios from 'axios';
+import ReactToPrint from 'react-to-print';
 
 class Checkout extends Component {
 	constructor(props) {
@@ -83,13 +84,10 @@ class Checkout extends Component {
 	};
 
 	PrintReceipt = () => {
-		if(!this.state.hasReceipt)
-		{
-			window.alert("You need a receipt to print first!");
+		if (!this.state.hasReceipt) {
+			window.alert('You need a receipt to print first!');
 			return;
 		}
-
-		
 	};
 
 	render() {
@@ -103,32 +101,63 @@ class Checkout extends Component {
 						quantity={this.props.quantity}
 					/>
 				</div>
-				<div className='checkout-receipt'>
-					<div className="receipt-header" >
-						<span className='receipt-title'>Checkout</span>
-						<button id='get-receipt' onClick={() => this.GetReceipt()}>
-							Get Receipt
-						</button>
+				<div className='receipt-container'>
+					<div
+						className='checkout-receipt'
+						ref={r => {
+							this.componentRef = r;
+						}}>
+						<div className='receipt-header'>
+							<span className='receipt-title'>Receipt</span>
+						</div>
+						<div>
+							{this.state.hasReceipt ? (
+								<div className='receipt-details'>
+									<div className='details-item'>
+										<span>Time:</span>
+										<span> {this.state.time}</span>
+									</div>
+									<div className='details-item'>
+										<span>ID:</span>
+										<span> {this.state.id}</span>
+									</div>
+									<div className='details-item'>
+										<span>Cashier:</span>
+										<span> {this.props.cashier}</span>
+									</div>
+									<div className='details-item'>
+										<span>Cash register:</span>
+										<span> {this.props.cashRegister}</span>
+									</div>
+									<div className='details-item'>
+										<span>Subtotal:</span>
+										<span> {this.props.subtotal}</span>
+									</div>
+									<div className='details-item'>
+										<span>Reduced tax total:</span>
+										<span> {this.state.reducedTax}</span>
+									</div>
+									<div className='details-item'>
+										<span>Normal tax total:</span>
+										<span> {this.state.normalTax}</span>
+									</div>
+									<div className='details-item'>
+										<span>Total:</span>
+										<span> {this.props.total}</span>
+									</div>
+								</div>
+							) : (
+								''
+							)}
+						</div>
 					</div>
-					<div>
-						{this.state.hasReceipt ? (
-							<div className='receipt-details'>
-								<div className="details-item"><span>Time:</span><span> {this.state.time}</span></div>
-								<div className="details-item"><span>ID:</span><span> {this.state.id}</span></div>
-								<div className="details-item"><span>Cashier:</span><span> {this.props.cashier}</span></div>
-								<div className="details-item"><span>Cash register:</span><span> {this.props.cashRegister}</span></div>
-								<div className="details-item"><span>Subtotal:</span><span> {this.props.subtotal}</span></div>
-								<div className="details-item"><span>Reduced tax total:</span><span> {this.state.reducedTax}</span></div>
-								<div className="details-item"><span>Normal tax total:</span><span> {this.state.normalTax}</span></div>
-								<div className="details-item"><span>Total:</span><span> {this.props.total}</span></div>
-							</div>
-						) : (
-							''
-						)}
-					</div>
-					<button id='print-receipt' onClick={() => this.PrintReceipt()}>
-						Print Receipt
+					<button id='get-receipt' className='get-receipt' onClick={() => this.GetReceipt()}>
+						Get Receipt
 					</button>
+					<ReactToPrint
+						trigger={() => <button className='print-button'>Print Receipt</button>}
+						content={() => this.componentRef}
+					/>
 				</div>
 			</div>
 		);
