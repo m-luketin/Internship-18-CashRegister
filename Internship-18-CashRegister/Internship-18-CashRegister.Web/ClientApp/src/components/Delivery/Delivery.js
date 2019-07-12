@@ -21,6 +21,15 @@ class Delivery extends Component {
 				default:
 					break;
 			}
+        });
+        
+        document.addEventListener('keydown', event => {
+			switch (event.keyCode) {
+				case 16: // Shift key
+					document.getElementById("go-to-receipts").click();
+				default:
+					break;
+			}
 		});
     }
     

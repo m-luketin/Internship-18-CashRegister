@@ -39,7 +39,7 @@ class CashRegister extends Component {
 	componentWillMount() {
 		document.addEventListener('keydown', event => {
 			switch (event.keyCode) {
-				case 9: // Tab key
+				case 16: // Shift key
 					document.getElementById("go-to-checkout").click();
 				default:
 					break;

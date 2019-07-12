@@ -36,11 +36,13 @@ namespace Internship_18_CashRegister.Web.Controllers
             var timeStamp = DateTime.Now;
             var employeeId = Int32.Parse(employee["employeeId"].ToString());
             var cashRegisterId = registerId;
-            
+
             var newReceiptInt = _receiptRepository.AddReceipt(serialNumber, timeStamp, employeeId, cashRegisterId);
 
+            string result = "{\"receiptId\": \"" + newReceiptInt + "\", \"time\": \"" + timeStamp + "\", \"guid\": \"" + serialNumber + "\"}";
+
             if(newReceiptInt != 0)
-                return Ok(newReceiptInt);
+                return Ok(result);
 
             return Forbid();
         }
