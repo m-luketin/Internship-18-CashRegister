@@ -15,13 +15,14 @@ const Login = props => {
     })
       .then(response => {
         localStorage.setItem("Token", response.data);
+        localStorage.setItem("CashRegister", cashRegister);
 
         Axios.post(`api/cashregister/authenticate`, {
           id: cashRegister
         })
           .then(() => {
             props.history.push(`/cashregister`);
-            props.loginHandler(cashRegister);
+            props.loginHandler(cashRegister, username);
           })
           .catch(() => {
             window.alert(`Cash register does not exist!`);

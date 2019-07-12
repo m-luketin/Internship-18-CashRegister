@@ -79,5 +79,27 @@ namespace Internship_18_CashRegister.Web.Controllers
 
             return Ok(JsonConvert.SerializeObject(gottenArticles));
         }
+
+        [HttpPost("delivery")]
+        public IActionResult EnterDelivery([FromBody]JObject data)
+        {
+            var items = data["items"].ToArray();
+            var quantities = data["quantity"].ToArray();
+
+            for(var i = 0; i < items.Length; i++)
+            {
+                if(_articleRepository.GetArticleByName(items[i].ToString()) == null || Int32.Parse(quantities[i].ToString()) < 1)
+                    return Forbid();
+            }
+
+            for(var i = 0; i < items.Length; i++)
+            {
+                var isUpdated = _articleRepository.UpdateQuantity(items[i].ToString(), Int32.Parse(quantities[i].ToString()));
+                if(!isUpdated)
+                    return Forbid();
+            }
+
+            return Ok();
+        }
     }
 }

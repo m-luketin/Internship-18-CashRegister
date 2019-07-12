@@ -34,7 +34,10 @@ class SearchItems extends Component {
 	ConfirmItem = () => {
 		var quantity = parseInt(document.getElementById('quantity-value').innerHTML, 10);
 
-		this.props.basketHandler(this.state.item, quantity);
+		if(this.props.isBasket)
+			this.props.basketHandler(this.state.item, quantity);
+		else
+			this.props.deliveryHandler(this.state.item, quantity);
 
 		this.setState({ items: [], item: null, quantitySelector: false, focused: 0 }, () => {
 			document.getElementById('search-box').value = '';

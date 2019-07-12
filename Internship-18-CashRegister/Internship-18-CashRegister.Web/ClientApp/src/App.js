@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router';
 import Login from './components/Login/Login';
 import CashRegister from './components/CashRegister/CashRegister';
 import Checkout from './components/Checkout/Checkout';
+import Delivery from './components/Delivery/Delivery';
 
 export default class App extends Component {
 	constructor(props) {
@@ -10,6 +11,7 @@ export default class App extends Component {
 
 		this.state = {
 			cashRegister: 0,
+			cashier: '',
 			basket: [],
 			quantity: [],
 			subtotal: 0,
@@ -17,9 +19,10 @@ export default class App extends Component {
 		};
 	}
 
-	loginHandler = cashRegister => {
+	loginHandler = (cashRegister, cashier) => {
 		this.setState({
-			cashRegister: cashRegister
+			cashRegister: cashRegister,
+			cashier: cashier
 		});
 	};
 
@@ -59,9 +62,12 @@ export default class App extends Component {
 							quantity={this.state.quantity}
 							subtotal={this.state.subtotal}
 							total={this.state.total}
+							cashier={this.state.cashier}
+							cashRegister={this.state.cashRegister}
 						/>
 					)}
 				/>
+				<Route exact path='/delivery' render={() => <Delivery />} />
 			</Switch>
 		);
 	}

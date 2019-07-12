@@ -39,12 +39,16 @@ class CashRegister extends Component {
 		return (
 			<div className='cash-register' id='cash-register'>
 				<Navbar />
-				<span className='register-title'>
-					Cash Register No. {this.props.cashRegister}
-				</span>
+				<span className='register-title'>Cash Register No. {this.props.cashRegister}</span>
 				<div className='register-components'>
-					<SearchItems basketHandler={this.basketHandler} />
-					<BasketItems checkout={false} basket={this.props.basket} quantity={this.props.quantity} subtotal={this.props.subtotal} total={this.props.total} />
+					<SearchItems basketHandler={this.basketHandler} isBasket={true} />
+					<BasketItems
+						checkout={false}
+						basket={this.props.basket}
+						quantity={this.props.quantity}
+						subtotal={this.props.subtotal}
+						total={this.props.total}
+					/>
 				</div>
 				<div className='register-prices'>
 					<span className='register-subtotal'>Before tax: {this.props.subtotal}</span>
