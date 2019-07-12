@@ -2,51 +2,62 @@ import React, { Component } from 'react';
 import Navbar from '../Navbar/Navbar';
 import BasketItems from '../CashRegister/BasketItems/BasketItems';
 import './style.css';
+import Axios from 'axios';
 
 class Checkout extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			time: "",
-			id: "",
+			time: '',
+			id: '',
 			reducedTax: 0,
 			normalTax: 0,
 			hasReceipt: false
 		};
 	}
 
-    CalculateSpecialSums = () => {
-        let reducedSum = 0, normalSum = 0, reducedCount = 0, normalCount = 0;
-        
-        this.props.basket.forEach(basketItem => {
-            if(basketItem.isTaxRateReduced)
-            {
-                reducedSum += basketItem.price * 0.05;
-                reducedCount++;
-            }
-            else
-            {
-                normalSum += basketItem.price * 0.25;
-                normalCount++;
-            }
-        });
+	CalculateSpecialSums = () => {
+		let reducedSum = 0,
+			normalSum = 0,
+			reducedCount = 0,
+			normalCount = 0;
 
-        if(reducedCount)
-            this.setState({reducedTax: reducedSum / reducedCount});
-        if(normalCount)
-            this.setState({normalTax: normalSum / normalCount});
-    }
+		this.props.basket.forEach(basketItem => {
+			if (basketItem.isTaxRateReduced) {
+				reducedSum += basketItem.price * 0.05;
+				reducedCount++;
+			} else {
+				normalSum += basketItem.price * 0.25;
+				normalCount++;
+			}
+		});
+
+		if (reducedCount) this.setState({ reducedTax: reducedSum / reducedCount });
+		if (normalCount) this.setState({ normalTax: normalSum / normalCount });
+	};
 
 	GetReceipt = () => {
-        this.CalculateSpecialSums();
+		this.CalculateSpecialSums();
+		let employee = '';
 
-		
+		Axios.get(`api/employee/username/${this.props.cashier}`)
+			.then(response => {
+				employee = response.data;
+			})
+			.then(() => {
+				Axios.post('api/receipt/add', {
+					employee: employee,
+					register: this.props.cashRegister
+				}).then(response => {
+					this.props.basket.map((item, key) => {
+						console.log(item.articleId);
+						Axios.post("api/articlereceipt/add", {receiptId: response.data, articleId: item.articleId, quantity: this.props.quantity[key]});
+					})
+				});
+			});
 
-
-
-
-        this.setState({hasReceipt: true});
-    };
+		this.setState({ hasReceipt: true });
+	};
 
 	render() {
 		return (

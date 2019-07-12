@@ -6,6 +6,7 @@ using Internship_18_CashRegister.Data.Entities.Models;
 using Internship_18_CashRegister.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace Internship_18_CashRegister.Web.Controllers
 {
@@ -26,12 +27,20 @@ namespace Internship_18_CashRegister.Web.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult AddReceipt(Receipt receiptToAdd)
+        public IActionResult AddReceipt([FromBody]JObject data)
         {
-            var wasAddSuccessful = _receiptRepository.AddReceipt(receiptToAdd);
+            var employee = data["employee"];
+            var registerId = Int32.Parse(data["register"].ToString());
 
-            if(wasAddSuccessful)
-                return Ok();
+            var serialNumber = Guid.NewGuid();
+            var timeStamp = DateTime.Now;
+            var employeeId = Int32.Parse(employee["employeeId"].ToString());
+            var cashRegisterId = registerId;
+            
+            var newReceiptInt = _receiptRepository.AddReceipt(serialNumber, timeStamp, employeeId, cashRegisterId);
+
+            if(newReceiptInt != 0)
+                return Ok(newReceiptInt);
 
             return Forbid();
         }

@@ -11,7 +11,8 @@ class Delivery extends Component {
 			items: [],
 			quantity: []
 		};
-	}
+    }
+    
     componentWillMount() {
 		document.addEventListener('keydown', event => {
 			switch (event.keyCode) {

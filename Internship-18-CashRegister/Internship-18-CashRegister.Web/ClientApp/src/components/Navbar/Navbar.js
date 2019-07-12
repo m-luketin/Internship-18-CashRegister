@@ -8,11 +8,14 @@ const Navbar = () => {
       <Link to="/cashregister" className="navbar-item">
         Cash Register
       </Link>
-      <Link to="/checkout" className="navbar-item">
+      <Link to="/checkout" id="go-to-checkout" className="navbar-item">
         Checkout
       </Link>
       <Link to="/delivery" className="navbar-item">
         Delivery
+      </Link>
+      <Link to="/receipts" className="navbar-item">
+        Receipts
       </Link>
       <Link to="/" className="navbar-item">
         Logout

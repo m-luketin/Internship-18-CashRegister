@@ -30,9 +30,21 @@ namespace Internship_18_CashRegister.Web.Controllers
             return Ok(_employeeRepository);
         }
 
+        [HttpGet("id/{id}")]
         public IActionResult GetEmployeeById(int id)
         {
             var gottenEmployee = _employeeRepository.GetEmployeeById(id);
+
+            if(gottenEmployee != null)
+                return Ok(gottenEmployee);
+
+            return NotFound();
+        }
+
+        [HttpGet("username/{username}")]
+        public IActionResult GetEmployeeByUsername(string username)
+        {
+            var gottenEmployee = _employeeRepository.GetEmployeeByUsername(username);
 
             if(gottenEmployee != null)
                 return Ok(gottenEmployee);

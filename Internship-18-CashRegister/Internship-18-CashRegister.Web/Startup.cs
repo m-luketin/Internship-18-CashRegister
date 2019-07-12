@@ -36,6 +36,7 @@ namespace Internship_18_CashRegister.Web
             services.AddScoped<ICashRegisterRepository, CashRegisterRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IReceiptRepository, ReceiptRepository>();
+            services.AddScoped<IArticleReceiptRepository, ArticleReceiptRepository>();
 
             services.AddMvc().AddJsonOptions( options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import SearchItems from './SearchItems/SearchItems';
 import BasketItems from './BasketItems/BasketItems';
 import Axios from 'axios';
@@ -34,6 +35,17 @@ class CashRegister extends Component {
 				this.props.cashRegisterHandler(newArticle, newQuantity, newSubtotal, newTotal);
 			});
 	};
+
+	componentWillMount() {
+		document.addEventListener('keydown', event => {
+			switch (event.keyCode) {
+				case 9: // Tab key
+					document.getElementById("go-to-checkout").click();
+				default:
+					break;
+			}
+		});
+    }
 
 	render() {
 		return (

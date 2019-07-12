@@ -68,6 +68,7 @@ export default class App extends Component {
 					)}
 				/>
 				<Route exact path='/delivery' render={() => <Delivery />} />
+				{/* <Route exact path='/receipts' render={() => <Receipts />} />  */}
 			</Switch>
 		);
 	}
