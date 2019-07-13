@@ -11,5 +11,9 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
         bool AddArticle(Article articleToAdd);
         bool EditArticle(Article editedArticle);
         Article GetArticleById(int id);
+        Article GetArticleByName(string name);
+        List<Article> SearchArticles(string name);
+        bool UpdateQuantity(string name, int quantityAdded);
+
     }
 }

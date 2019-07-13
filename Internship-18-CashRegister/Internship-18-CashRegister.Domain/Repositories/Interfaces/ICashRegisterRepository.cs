@@ -8,5 +8,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
     public interface ICashRegisterRepository
     {
         List<CashRegister> GetAllCashRegisters();
+        bool DoesExist(int id);
     }
 }

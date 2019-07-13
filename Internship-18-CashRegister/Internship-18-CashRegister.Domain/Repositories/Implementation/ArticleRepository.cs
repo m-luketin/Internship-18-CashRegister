@@ -53,6 +53,30 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
         {
             return _context.Articles.Find(id);
         }
+        public Article GetArticleByName(string name)
+        {
+            return _context.Articles.FirstOrDefault( a => String.Equals(a.Name, name, StringComparison.CurrentCultureIgnoreCase));
+        }
+        public List<Article> SearchArticles(string name)
+        {
+            return _context.Articles.Where(a => a.Name.Contains(name)).ToList();
+        }
+
+        public bool UpdateQuantity(string name, int quantityAdded)
+        {
+            if(quantityAdded < 1)
+                return false;
+
+            var articleToUpdate = _context.Articles.FirstOrDefault(a => String.Equals(a.Name, name, StringComparison.CurrentCultureIgnoreCase));
+
+            if(articleToUpdate == null)
+                return false;
+
+            articleToUpdate.UnitsInStock += quantityAdded;
+            _context.SaveChanges();
+
+            return true;
+        }
 
         private bool DoesExist(Article article)
         {

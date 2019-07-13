@@ -6,6 +6,7 @@ using Internship_18_CashRegister.Data.Entities.Models;
 using Internship_18_CashRegister.Domain.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Internship_18_CashRegister.Web.Controllers
@@ -25,7 +26,13 @@ namespace Internship_18_CashRegister.Web.Controllers
         {
             var allReceipts = _receiptRepository.GetAllReceipts();
 
-            return Ok(allReceipts);
+            foreach(var receipt in allReceipts)
+            {
+                receipt.Employee.Receipts = null;
+                receipt.Register.Receipts = null;
+            }
+
+            return Ok(JsonConvert.SerializeObject(allReceipts));
         }
 
         [HttpPost("add")]

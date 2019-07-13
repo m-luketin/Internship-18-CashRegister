@@ -8,7 +8,7 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
     public interface IReceiptRepository
     {
         List<Receipt> GetAllReceipts();
-        bool AddReceipt(Receipt receiptToAdd);
+        int AddReceipt(Guid serialNumber, DateTime timeStamp, int employeeId, int cashRegisterId);
         Receipt GetReceiptById(int id);
     }
 }

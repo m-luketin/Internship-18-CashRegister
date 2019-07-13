@@ -12,6 +12,5 @@ namespace Internship_18_CashRegister.Data.Entities.Models
         public Employee Employee { get; set; }
         public CashRegister Register { get; set; }
         public DateTime TimeStamp { get; set; }
-         
     }
 }

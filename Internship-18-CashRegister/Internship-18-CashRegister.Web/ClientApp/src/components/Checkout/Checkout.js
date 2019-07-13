@@ -32,22 +32,17 @@ class Checkout extends Component {
 
 	CalculateSpecialSums = () => {
 		let reducedSum = 0,
-			normalSum = 0,
-			reducedCount = 0,
-			normalCount = 0;
+			normalSum = 0;
 
 		this.props.basket.forEach(basketItem => {
 			if (basketItem.isTaxRateReduced) {
 				reducedSum += basketItem.price * 0.05;
-				reducedCount++;
 			} else {
 				normalSum += basketItem.price * 0.25;
-				normalCount++;
 			}
 		});
 
-		if (reducedCount) this.setState({ reducedTax: reducedSum / reducedCount });
-		if (normalCount) this.setState({ normalTax: normalSum / normalCount });
+		this.setState({ reducedTax: reducedSum, normalTax: normalSum });
 	};
 
 	GetReceipt = () => {

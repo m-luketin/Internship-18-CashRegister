@@ -21,5 +21,9 @@ namespace Internship_18_CashRegister.Domain.Repositories.Implementation
             return _context.CashRegisters.ToList();
         }
         
+        public bool DoesExist(int id)
+        {
+            return _context.CashRegisters.Find(id) != null;
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Internship_18_CashRegister.Domain.Repositories.Interfaces
     {
         List<Employee> GetAllEmployees();
         Employee GetEmployeeById(int id);
+        Employee GetEmployeeByUsername(string username);
     }
 }

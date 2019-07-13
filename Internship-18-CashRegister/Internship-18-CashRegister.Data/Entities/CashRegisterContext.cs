@@ -9,7 +9,8 @@ namespace Internship_18_CashRegister.Data.Entities
     public class CashRegisterContext : DbContext
     {
         public CashRegisterContext(DbContextOptions options) : base(options)
-        {}
+        {
+        }
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleReceipt> ArticleReceipts { get; set; }
