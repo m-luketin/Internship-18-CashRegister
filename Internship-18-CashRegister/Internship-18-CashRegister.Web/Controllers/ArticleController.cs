@@ -49,7 +49,7 @@ namespace Internship_18_CashRegister.Web.Controllers
             return NotFound();
         }
 
-        [HttpGet("get-by-id")]
+        [HttpGet("{id}")]
         public IActionResult GetArticle(int id)
         {
             var gottenArticle = _articleRepository.GetArticleById(id);

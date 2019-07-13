@@ -34,14 +34,19 @@ class SearchItems extends Component {
 	ConfirmItem = () => {
 		var quantity = parseInt(document.getElementById('quantity-value').innerHTML, 10);
 
-		if(this.props.isBasket)
-			this.props.basketHandler(this.state.item, quantity);
-		else
-			this.props.deliveryHandler(this.state.item, quantity);
-
-		this.setState({ items: [], item: null, quantitySelector: false, focused: 0 }, () => {
-			document.getElementById('search-box').value = '';
-			document.getElementById('search-box').focus();
+		Axios.post('api/article/get-by-name', { name: this.state.item }).then(response => {
+			console.log(response);
+			if (response.data.unitsInStock < quantity) {
+				window.alert('Not enough items in stock!');
+			} else {
+				if (this.props.isBasket) this.props.basketHandler(this.state.item, quantity);
+				else this.props.deliveryHandler(this.state.item, quantity);
+			}
+			
+			this.setState({ items: [], item: null, quantitySelector: false, focused: 0 }, () => {
+				document.getElementById('search-box').value = '';
+				document.getElementById('search-box').focus();
+			});
 		});
 	};
 

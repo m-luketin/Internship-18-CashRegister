@@ -13,11 +13,21 @@ namespace Internship_18_CashRegister.Web.Controllers
     [ApiController]
     public class ArticleReceiptController : ControllerBase
     {
-        public ArticleReceiptController(IArticleReceiptRepository articleRepository)
+        public ArticleReceiptController(IArticleReceiptRepository articleReceiptRepository)
         {
-            _articleRepository = articleRepository;
+            _articleReceiptRepository = articleReceiptRepository;
         }
-        private readonly IArticleReceiptRepository _articleRepository;
+        private readonly IArticleReceiptRepository _articleReceiptRepository;
+
+        [HttpGet("{id}")]
+        public IActionResult GetItemsWithQuantityByReceipt(int id)
+        {
+            var articleIdsWithQuantities = _articleReceiptRepository.GetArticlesWithQuantityByReceiptId(id);
+            if(articleIdsWithQuantities != null)
+                return Ok(articleIdsWithQuantities);
+
+            return NotFound();
+        }
 
         [HttpPost("add")]
         public IActionResult AddArticleReceipt([FromBody]JObject data)
@@ -26,7 +36,7 @@ namespace Internship_18_CashRegister.Web.Controllers
             var articleId = Int32.Parse(data["articleId"].ToString());
             var quantity = Int32.Parse(data["quantity"].ToString());
 
-            var wasAddSuccessful= _articleRepository.AddArticleReceipt(receiptId, articleId, quantity);
+            var wasAddSuccessful= _articleReceiptRepository.AddArticleReceipt(receiptId, articleId, quantity);
             if(wasAddSuccessful)
                 return Ok();
 

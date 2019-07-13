@@ -23,7 +23,9 @@ namespace Internship_18_CashRegister.Web.Controllers
         [HttpGet("all")]
         public IActionResult GetAllReceipts()
         {
-            return Ok(_receiptRepository);
+            var allReceipts = _receiptRepository.GetAllReceipts();
+
+            return Ok(allReceipts);
         }
 
         [HttpPost("add")]

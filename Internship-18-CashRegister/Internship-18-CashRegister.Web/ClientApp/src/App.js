@@ -4,6 +4,7 @@ import Login from './components/Login/Login';
 import CashRegister from './components/CashRegister/CashRegister';
 import Checkout from './components/Checkout/Checkout';
 import Delivery from './components/Delivery/Delivery';
+import Receipts from './components/Receipts/Receipts';
 
 export default class App extends Component {
 	constructor(props) {
@@ -68,7 +69,7 @@ export default class App extends Component {
 					)}
 				/>
 				<Route exact path='/delivery' render={() => <Delivery />} />
-				{/* <Route exact path='/receipts' render={() => <Receipts />} />  */}
+				 <Route exact path='/receipts' render={() => <Receipts />} />  
 			</Switch>
 		);
 	}
